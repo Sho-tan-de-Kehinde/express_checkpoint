@@ -4,14 +4,14 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
-//const custom_mw = function(req, res, next){
-
-    //console.log('this a custom Middleware')
-    
-//}
+app.use(function(req, res, next){
+ req.requestTime = new Date().toISOString();
+     next();
+});
 
 app.get('/',  (req,  res)=>{
     res.render('home.ejs')
+    console.log(req.requestTime);
 });
 app.get('/service',  (req,  res)=>{
     res.render('services.ejs')
